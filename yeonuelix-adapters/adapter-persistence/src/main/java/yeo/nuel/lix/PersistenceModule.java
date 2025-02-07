@@ -1,2 +1,5 @@
-package yeo.nuel.lix;public interface PersistenceModule {
+package yeo.nuel.lix;
+
+public interface PersistenceModule {
+
 }

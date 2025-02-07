@@ -1,2 +1,5 @@
-package yeo.nuel.lix;public interface UseCaseModule {
+package yeo.nuel.lix;
+
+public interface UseCaseModule {
+
 }

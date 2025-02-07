@@ -1,2 +1,13 @@
-package yeo.nuel.lix.sample;public class SamplePortResponse {
+package yeo.nuel.lix.sample;
+
+import lombok.Getter;
+
+@Getter
+public class SamplePortResponse {
+
+    private final String name;
+
+    public SamplePortResponse(String name) {
+        this.name = name;
+    }
 }

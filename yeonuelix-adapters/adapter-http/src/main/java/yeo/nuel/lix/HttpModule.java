@@ -1,2 +1,5 @@
-package yeo.nuel.lix;public interface HTTPModule {
+package yeo.nuel.lix;
+
+public interface HttpModule {
+
 }

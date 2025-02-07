@@ -1,2 +1,5 @@
-package yeo.nuel.lix;public interface ServiceModule {
+package yeo.nuel.lix;
+
+public interface ServiceModule {
+
 }

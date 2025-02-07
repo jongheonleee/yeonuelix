@@ -1,2 +1,5 @@
-package yeo.nuel.lix;public interface DomainModule {
+package yeo.nuel.lix;
+
+public interface DomainModule {
+
 }

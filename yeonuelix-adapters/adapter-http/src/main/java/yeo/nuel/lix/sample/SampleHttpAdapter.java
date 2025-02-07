@@ -1,2 +1,12 @@
-package yeo.nuel.lix.sample;public class SampleHttpAdapter {
+package yeo.nuel.lix.sample;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class SampleHttpAdapter implements SamplePort {
+
+    @Override
+    public SamplePortResponse getSample() {
+        return new SamplePortResponse("Hello World");
+    }
 }

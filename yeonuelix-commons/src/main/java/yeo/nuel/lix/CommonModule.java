@@ -1,2 +1,5 @@
-package yeo.nuel.lix;public interface CommonModule {
+package yeo.nuel.lix;
+
+public interface CommonModule {
+
 }

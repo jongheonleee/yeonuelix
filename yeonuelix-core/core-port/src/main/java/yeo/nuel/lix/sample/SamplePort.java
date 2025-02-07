@@ -1,2 +1,5 @@
-package yeo.nuel.lix.sample;public interface SamplePort {
+package yeo.nuel.lix.sample;
+
+public interface SamplePort {
+    SamplePortResponse getSample();
 }
