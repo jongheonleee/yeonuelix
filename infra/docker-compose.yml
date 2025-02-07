@@ -1,0 +1,24 @@
+version : '3.8'
+services:
+  mysql :
+    image: mysql:8.0
+    container_name: yeonuelix-mysql
+    restart: always
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD : 12341234
+      TZ : Asia/Seoul
+    volumes:
+      - ./db/mysql/data:/var/lib/mysql
+      - ./db/mysql/init:/docker-entrypoint-initdb.d
+    platform: linux/x86_64
+
+  redis :
+    image: redis:alpine
+    container_name: yeonuelix-redis
+    restart: always
+    command: redis-server
+    hostname: redis
+    ports:
+      - 6379:6379
