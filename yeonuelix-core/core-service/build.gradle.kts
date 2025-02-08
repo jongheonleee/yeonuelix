@@ -3,5 +3,5 @@ dependencies {
     implementation(project(":yeonuelix-core:core-port"))
     implementation("org.springframework:spring-context")
 
-    runtimeOnly(project(":yeonuelix-adapters:adapter-http"))
+    implementation(project(":yeonuelix-adapters:adapter-http"))
 }
