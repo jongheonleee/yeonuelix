@@ -3,6 +3,7 @@ package yeo.nuel.lix.user;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import yeo.nuel.lix.exception.UserException;
 import yeo.nuel.lix.user.command.UserResponse;
 
 @Service
@@ -16,7 +17,7 @@ public class UserService implements FetchUserUseCase {
     public UserResponse findUserByEmail(String email) {
         Optional<UserPortResponse> byEmail = fetchUserPort.findByEmail(email);
         if (byEmail.isEmpty()) {
-            throw new RuntimeException();
+            throw new UserException.UserDoesNotExistException();
         }
 
         UserPortResponse userPortResponse = byEmail.get();
