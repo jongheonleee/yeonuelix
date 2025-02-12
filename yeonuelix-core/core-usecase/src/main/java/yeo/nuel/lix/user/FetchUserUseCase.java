@@ -1,6 +1,6 @@
 package yeo.nuel.lix.user;
 
-import yeo.nuel.lix.user.command.UserResponse;
+import yeo.nuel.lix.user.response.UserResponse;
 
 public interface FetchUserUseCase {
 

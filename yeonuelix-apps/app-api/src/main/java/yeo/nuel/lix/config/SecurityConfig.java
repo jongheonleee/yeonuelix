@@ -35,10 +35,12 @@ public class SecurityConfig {
 
         // 요청에 대한 인증 처리 -> 모든 요청에 대해 인증 요구
         httpSecurity.authorizeHttpRequests(auth ->
-                auth.anyRequest().authenticated());
+                    auth.requestMatchers("/api/v1/user/register").permitAll() // 회원가입 요청은 인증 없이 허용
+                        .anyRequest().authenticated()
+        );
 
         // oauth2 관련 설정
-        httpSecurity.oauth2Login(oauth2 -> oauth2.failureUrl("/login?error=true"));
+//        httpSecurity.oauth2Login(oauth2 -> oauth2.failureUrl("/login?error=true"));
 
 
         // UserDetailsService 설정

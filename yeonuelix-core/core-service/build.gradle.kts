@@ -2,6 +2,7 @@ dependencies {
     implementation(project(":yeonuelix-core:core-usecase"))
     implementation(project(":yeonuelix-core:core-port"))
     implementation(project(":yeonuelix-commons"))
+    implementation(project(":yeonuelix-core:core-domain"))
 
     implementation("org.springframework:spring-context")
     implementation("org.springframework.data:spring-data-commons")

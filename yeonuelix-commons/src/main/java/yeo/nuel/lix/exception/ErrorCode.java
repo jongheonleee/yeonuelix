@@ -6,8 +6,8 @@ import lombok.Getter;
 public enum ErrorCode {
 
     DEFAULT_ERROR("YLX0000", "에러가 발생했습니다."),
-    USER_DOES_NOT_EXIST("YLX2001", "사용자가 존재하지 않습니다."),
-
+    USER_DOES_NOT_EXIST("YLX2000", "사용자가 존재하지 않습니다."),
+    USER_ALREADY_EXISTS("YLX2001", "사용자가 이미 존재합니다."),
     ;
 
 

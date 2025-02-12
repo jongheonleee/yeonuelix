@@ -1,5 +1,7 @@
 package yeo.nuel.lix.exception;
 
+import static yeo.nuel.lix.exception.ErrorCode.*;
+
 import lombok.Getter;
 
 @Getter
@@ -13,7 +15,13 @@ public class UserException extends RuntimeException {
 
     public static class UserDoesNotExistException extends UserException {
         public UserDoesNotExistException() {
-            super(ErrorCode.USER_DOES_NOT_EXIST);
+            super(USER_DOES_NOT_EXIST);
+        }
+    }
+
+    public static class UserAlreadyExistsException extends UserException {
+        public UserAlreadyExistsException() {
+            super(USER_ALREADY_EXISTS);
         }
     }
 }
