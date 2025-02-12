@@ -4,7 +4,6 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yeo.nuel.lix.exception.UserException;
-import yeo.nuel.lix.exception.UserException.UserAlreadyExistsException;
 import yeo.nuel.lix.user.command.UserRegistrationCommand;
 import yeo.nuel.lix.user.response.UserRegistrationResponse;
 import yeo.nuel.lix.user.response.UserResponse;

@@ -1,12 +1,15 @@
 package yeo.nuel.lix.controller.user.request;
 
 import lombok.Getter;
+import yeo.nuel.lix.annotation.PasswordEncryption;
 
 @Getter
 public class UserRegisterRequest {
 
     private final String username;
-    private final String password;
+
+    @PasswordEncryption
+    private String password;
     private final String email;
     private final String phone;
 
