@@ -64,4 +64,9 @@ public class UserService implements FetchUserUseCase, RegisterUserUseCase {
                 response.getPhone()
         );
     }
+
+    @Override
+    public UserResponse findByProviderId(String userId) {
+        return null;
+    }
 }

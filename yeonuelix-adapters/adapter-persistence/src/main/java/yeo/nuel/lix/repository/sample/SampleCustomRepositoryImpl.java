@@ -4,7 +4,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import yeo.nuel.lix.entity.QSampleEntity;
+import yeo.nuel.lix.entity.smaple.QSampleEntity;
 import yeo.nuel.lix.entity.smaple.SampleEntity;
 
 @Repository
@@ -16,6 +16,6 @@ public class SampleCustomRepositoryImpl implements SampleCustomRepository {
     @Override
     public List<SampleEntity> findAllByAbc() {
         return jpaQueryFactory.selectFrom(QSampleEntity.sampleEntity)
-                              .fetch();
+                .fetch();
     }
 }

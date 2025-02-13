@@ -11,4 +11,9 @@ dependencies {
     implementation(project(":yeonuelix-adapters:adapter-http"))
     implementation(project(":yeonuelix-adapters:adapter-persistence"))
     implementation(project(":yeonuelix-adapters:adapter-redis"))
+
+
+    implementation("io.jsonwebtoken:jjwt-api")
+    implementation("io.jsonwebtoken:jjwt-impl")
+    implementation("io.jsonwebtoken:jjwt-jackson")
 }
