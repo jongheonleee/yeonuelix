@@ -1,5 +1,6 @@
 package yeo.nuel.lix.security;
 
+import io.micrometer.common.util.StringUtils;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,7 +26,7 @@ public class YeonuelixUserDetailsService implements UserDetailsService {
                 userByEmail.getPassword(),
                 userByEmail.getEmail(),
                 userByEmail.getPhone(),
-                List.of(new SimpleGrantedAuthority(userByEmail.getRole()))
+                List.of(new SimpleGrantedAuthority(StringUtils.isBlank(userByEmail.getRole()) ? "-" : userByEmail.getRole()))
         );
     }
 }

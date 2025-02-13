@@ -35,7 +35,10 @@ public class SecurityConfig {
 
         // 요청에 대한 인증 처리 -> 모든 요청에 대해 인증 요구
         httpSecurity.authorizeHttpRequests(auth ->
-                    auth.requestMatchers("/api/v1/user/register").permitAll() // 회원가입 요청은 인증 없이 허용
+                    auth.requestMatchers(
+                                    "/api/v1/user/register",
+                                    "/api/v1/user/login"
+                            ).permitAll() // 회원가입,로그인 요청은 인증 없이 허용
                         .anyRequest().authenticated()
         );
 
