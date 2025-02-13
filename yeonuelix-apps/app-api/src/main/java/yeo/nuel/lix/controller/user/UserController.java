@@ -1,5 +1,6 @@
 package yeo.nuel.lix.controller.user;
 
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -51,6 +52,13 @@ public class UserController {
         YeonuelixAuthUser principal = (YeonuelixAuthUser) authenticate.getPrincipal();
 
         // 토큰값 조회 및 반환 -> 프론트엔드에선 토큰값 활용
+        return YeonuelixApiResponse.ok("access-token");
+    }
+
+    // 소셜 로그인 처리
+    @PostMapping("/api/v1/user/callback")
+    public YeonuelixApiResponse<String> kakaoCallback(@RequestBody Map<String, String> request) {
+        String code = request.get("code");
         return YeonuelixApiResponse.ok(null);
     }
 }

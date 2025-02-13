@@ -1,7 +1,7 @@
-package yeo.nuel.lix.repository;
+package yeo.nuel.lix.repository.sample;
 
 import java.util.List;
-import yeo.nuel.lix.entity.SampleEntity;
+import yeo.nuel.lix.entity.smaple.SampleEntity;
 
 public interface SampleCustomRepository {
     List<SampleEntity> findAllByAbc();

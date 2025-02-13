@@ -1,4 +1,4 @@
-package yeo.nuel.lix.entity;
+package yeo.nuel.lix.entity.smaple;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

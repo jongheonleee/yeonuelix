@@ -43,7 +43,7 @@ public class SecurityConfig {
         );
 
         // oauth2 관련 설정
-//        httpSecurity.oauth2Login(oauth2 -> oauth2.failureUrl("/login?error=true"));
+        httpSecurity.oauth2Login(oauth2 -> oauth2.failureUrl("/login?error=true"));
 
 
         // UserDetailsService 설정

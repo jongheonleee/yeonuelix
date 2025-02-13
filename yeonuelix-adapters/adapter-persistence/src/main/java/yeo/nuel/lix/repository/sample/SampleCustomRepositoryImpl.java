@@ -1,11 +1,11 @@
-package yeo.nuel.lix.repository;
+package yeo.nuel.lix.repository.sample;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import yeo.nuel.lix.entity.QSampleEntity;
-import yeo.nuel.lix.entity.SampleEntity;
+import yeo.nuel.lix.entity.smaple.SampleEntity;
 
 @Repository
 @RequiredArgsConstructor

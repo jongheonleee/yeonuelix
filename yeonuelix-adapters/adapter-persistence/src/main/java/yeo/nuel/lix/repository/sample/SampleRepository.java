@@ -1,10 +1,10 @@
-package yeo.nuel.lix.repository;
+package yeo.nuel.lix.repository.sample;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import yeo.nuel.lix.entity.SampleEntity;
+import yeo.nuel.lix.entity.smaple.SampleEntity;
 import yeo.nuel.lix.sample.SamplePersistencePort;
 
 @Repository
