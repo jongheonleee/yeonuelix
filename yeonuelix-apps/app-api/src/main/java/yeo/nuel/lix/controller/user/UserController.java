@@ -12,9 +12,12 @@ import yeo.nuel.lix.controller.YeonuelixApiResponse;
 import yeo.nuel.lix.controller.user.request.UserLoginRequest;
 import yeo.nuel.lix.controller.user.request.UserRegisterRequest;
 import yeo.nuel.lix.security.YeonuelixAuthUser;
+import yeo.nuel.lix.token.FetchTokenUseCase;
+import yeo.nuel.lix.user.FetchUserUseCase;
 import yeo.nuel.lix.user.RegisterUserUseCase;
 import yeo.nuel.lix.user.command.UserRegistrationCommand;
 import yeo.nuel.lix.user.response.UserRegistrationResponse;
+import yeo.nuel.lix.user.response.UserResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +25,8 @@ public class UserController {
 
     private final RegisterUserUseCase registerUserUseCase;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final FetchTokenUseCase fetchTokenUseCase;
+    private final FetchUserUseCase fetchUserUseCase;
 
     // 회원가입 처리
     @PostMapping("/api/v1/user/register")
@@ -55,10 +60,14 @@ public class UserController {
         return YeonuelixApiResponse.ok("access-token");
     }
 
-    // 소셜 로그인 처리
+    // 소셜 로그인 처리 -> 현재 카카오 로그인 처리하고 나서 카카오 서버랑 해당 부분이랑 매핑이 안되어 있음
     @PostMapping("/api/v1/user/callback")
     public YeonuelixApiResponse<String> kakaoCallback(@RequestBody Map<String, String> request) {
         String code = request.get("code");
+
+        String accessTokenFromKakao = fetchTokenUseCase.getTokenFromKakao(code);
+        UserResponse kakaoUser = fetchUserUseCase.findKakaoUser(accessTokenFromKakao);
+
         return YeonuelixApiResponse.ok(null);
     }
 }

@@ -4,7 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login({ setIsLoggedIn }) {
-  const [username, setUsername] = useState('yeonul.lee@kakaobank.com');
+  const [username, setUsername] = useState('yeonuel.lee@kakaobank.com');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅 사용
