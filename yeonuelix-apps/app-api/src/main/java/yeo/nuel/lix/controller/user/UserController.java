@@ -1,10 +1,12 @@
 package yeo.nuel.lix.controller.user;
 
 import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import yeo.nuel.lix.controller.user.request.UserLoginRequest;
 import yeo.nuel.lix.controller.user.request.UserRegisterRequest;
 import yeo.nuel.lix.security.YeonuelixAuthUser;
 import yeo.nuel.lix.token.FetchTokenUseCase;
+import yeo.nuel.lix.token.UpdateTokenUseCase;
 import yeo.nuel.lix.user.FetchUserUseCase;
 import yeo.nuel.lix.user.RegisterUserUseCase;
 import yeo.nuel.lix.user.command.UserRegistrationCommand;
@@ -27,6 +30,7 @@ public class UserController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final FetchTokenUseCase fetchTokenUseCase;
     private final FetchUserUseCase fetchUserUseCase;
+    private final UpdateTokenUseCase updateTokenUseCase;
 
     // 회원가입 처리
     @PostMapping("/api/v1/user/register")
@@ -68,6 +72,18 @@ public class UserController {
         String accessTokenFromKakao = fetchTokenUseCase.getTokenFromKakao(code);
         UserResponse kakaoUser = fetchUserUseCase.findKakaoUser(accessTokenFromKakao);
 
-        return YeonuelixApiResponse.ok(null);
+        // 소셜 사용자가 이미 존재하는지 확인
+        UserResponse byProviderId = fetchUserUseCase.findByProviderId(kakaoUser.getProviderId());
+
+        // 만약 존재하지 않으면, 회원가입을 진행
+        if (ObjectUtils.isEmpty(byProviderId)) {
+            registerUserUseCase.registerSocialUser(kakaoUser.getUsername(),
+                                                   kakaoUser.getProvider(),
+                                                   kakaoUser.getProviderId());
+        }
+
+
+        // 토큰을 발급해서 반환
+        return YeonuelixApiResponse.ok(updateTokenUseCase.upsertToken(kakaoUser.getProviderId()));
     }
 }

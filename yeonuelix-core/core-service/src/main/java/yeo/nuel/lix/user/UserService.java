@@ -67,8 +67,26 @@ public class UserService implements FetchUserUseCase, RegisterUserUseCase {
     }
 
     @Override
-    public UserResponse findByProviderId(String userId) {
-        return null;
+    public UserResponse findByProviderId(String providerId) {
+        return fetchUserPort.findByProviderId(providerId)
+                .map(it -> UserResponse.builder()
+                                       .providerId(it.getProviderId())
+                                       .provider(it.getProvider())
+                                       .username(it.getUsername())
+                                       .build())
+                .orElse(null);
+    }
+
+
+    @Override
+    public UserRegistrationResponse registerSocialUser(String username, String provider, String providerId) {
+        Optional<UserPortResponse> byProviderId = fetchUserPort.findByProviderId(providerId);
+        if (byProviderId.isPresent()) {
+            return null;
+        }
+
+        UserPortResponse socialUser = insertUserPort.createSocialUser(username, provider, providerId);
+        return new UserRegistrationResponse(socialUser.getUsername(), null, null);
     }
 
     @Override

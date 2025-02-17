@@ -89,6 +89,23 @@ public class TokenService implements FetchTokenUseCase, CreateTokenUseCase, Upda
         }
     }
 
+    @Override
+    public String upsertToken(String providerId) {
+        TokenPortResponse byUserId = searchTokenPort.findByUserId(providerId);
+        String accessToken = getToken(providerId, Duration.ofHours(3));
+        String refreshToken = getToken(providerId, Duration.ofHours(24));
+
+        if (byUserId == null) {
+            // create
+            insertTokenPort.create(providerId, accessToken, refreshToken);
+        } else {
+            // update
+            updateTokenPort.updateToken(providerId, accessToken, refreshToken);
+        }
+
+        return accessToken;
+    }
+
     private String getToken(String userId, Duration duration) {
         Date now = new Date();
         Instant instant = now.toInstant();

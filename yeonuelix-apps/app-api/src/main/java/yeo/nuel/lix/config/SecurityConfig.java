@@ -37,7 +37,8 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(auth ->
                     auth.requestMatchers(
                                     "/api/v1/user/register",
-                                    "/api/v1/user/login"
+                                    "/api/v1/user/login",
+                                    "/api/v1/user/callback"
                             ).permitAll() // 회원가입,로그인 요청은 인증 없이 허용
                         .anyRequest().authenticated()
         );
