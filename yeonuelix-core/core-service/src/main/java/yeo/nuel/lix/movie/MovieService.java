@@ -1,14 +1,17 @@
 package yeo.nuel.lix.movie;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import yeo.nuel.lix.movie.response.MovieResponse;
 import yeo.nuel.lix.movie.response.PageableMoviesResponse;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-public class MovieService implements FetchMovieUseCase {
+public class MovieService implements FetchMovieUseCase, InsertMovieUseCase {
 
     private final TmdbMoviePort tmdbMoviePort;
 
@@ -27,5 +30,11 @@ public class MovieService implements FetchMovieUseCase {
                 tmdbPageableMovies.getPage(),
                 tmdbPageableMovies.isHasNext()
         );
+    }
+
+    @Override
+    public void insert(List<MovieResponse> items) {
+        log.info("[{}] {}", items.size(), items.get(0).getMovieName());
+
     }
 }

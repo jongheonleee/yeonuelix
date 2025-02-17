@@ -1,5 +1,13 @@
-DROP TABLE IF EXISTS `USERS`;
-CREATE TABLE `USERS`
+DROP TABLE IF EXISTS `sample`;
+CREATE TABLE `sample`
+(
+    `sample_id`   VARCHAR(255)	 NOT NULL,
+    `sample_name` VARCHAR(255)   NOT NULL,
+    `sample_desc` VARCHAR(255)   NOT NULL
+);
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`
 (
     user_id	        VARCHAR(255)	NOT NULL	COMMENT 'uuid로 저장',
     user_name	    VARCHAR(50)	    NOT NULL,
