@@ -14,6 +14,7 @@ import yeo.nuel.lix.movie.response.PageableMoviesResponse;
 public class MovieService implements FetchMovieUseCase, InsertMovieUseCase {
 
     private final TmdbMoviePort tmdbMoviePort;
+    private final PersistenceMoviePort persistenceMoviePort;
 
     @Override
     public PageableMoviesResponse fetchFromClient(int page) {
@@ -34,7 +35,15 @@ public class MovieService implements FetchMovieUseCase, InsertMovieUseCase {
 
     @Override
     public void insert(List<MovieResponse> items) {
-        log.info("[{}] {}", items.size(), items.get(0).getMovieName());
+        items.forEach(it -> {
+            YeonuelixMovie yeonuelixMovie = YeonuelixMovie.builder()
+                                                          .movieName(it.getMovieName())
+                                                          .isAdult(it.isAdult())
+                                                          .genre("")
+                                                          .overview(it.getOverview())
+                                                          .build();
+            persistenceMoviePort.insert(yeonuelixMovie);
+        });
 
     }
 }
