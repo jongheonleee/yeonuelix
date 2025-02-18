@@ -50,13 +50,15 @@ public class TokenService implements FetchTokenUseCase, CreateTokenUseCase, Upda
 
     @Override
     public Boolean validateToken(String accessToken) {
+        System.out.println("accessToken = " + accessToken);
         Jwts.parser()
-                .setSigningKey(getSignKey())
+                .setSigningKey(secretKey)
                 .build()
-                .parseClaimsJwt(accessToken);
+                .parseClaimsJws(accessToken);
 
         return true;
     }
+
 
     @Override
     public String getTokenFromKakao(String code) {

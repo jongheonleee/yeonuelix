@@ -46,4 +46,21 @@ public class MovieService implements FetchMovieUseCase, InsertMovieUseCase {
         });
 
     }
+
+    @Override
+    public PageableMoviesResponse fetchFromDb(int page) {
+        List<YeonuelixMovie> yeonuelixMovies = persistenceMoviePort.fetchBy(page, 10);
+        return new PageableMoviesResponse(
+                yeonuelixMovies.stream()
+                               .map(it -> new MovieResponse(
+                                                it.getMovieName(),
+                                                it.getIsAdult(),
+                                                List.of(),
+                                                it.getOverview(),
+                                                it.getReleasedAt()))
+                               .toList(),
+                page,
+                true
+        );
+    }
 }
