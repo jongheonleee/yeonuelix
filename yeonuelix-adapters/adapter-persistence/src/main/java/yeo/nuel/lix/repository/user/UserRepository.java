@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import yeo.nuel.lix.entity.user.SocialUserEntity;
 import yeo.nuel.lix.entity.user.UserEntity;
+import yeo.nuel.lix.repository.subscription.UserSubscriptionRepository;
 import yeo.nuel.lix.repository.user.social.SocialUserJpaRepository;
+import yeo.nuel.lix.subscription.UserSubscription;
 import yeo.nuel.lix.user.CreateUser;
 import yeo.nuel.lix.user.FetchUserPort;
 import yeo.nuel.lix.user.InsertUserPort;
@@ -18,6 +20,7 @@ public class UserRepository implements FetchUserPort, InsertUserPort {
 
     private final UserJpaRepository userJpaRepository;
     private final SocialUserJpaRepository socialUserJpaRepository;
+    private final UserSubscriptionRepository userSubscriptionRepository;
 
     @Override
     @Transactional
@@ -42,11 +45,19 @@ public class UserRepository implements FetchUserPort, InsertUserPort {
         }
 
         SocialUserEntity socialUserEntity = byProviderId.get();
+
+        Optional<UserSubscription> byUserId = userSubscriptionRepository.findByUserId(socialUserEntity.getSocialUserId());
+
+
+
         return Optional.of(
                 UserPortResponse.builder()
                         .provider(socialUserEntity.getProvider())
                         .providerId(socialUserEntity.getProviderId())
                         .username(socialUserEntity.getUsername())
+                        .role(byUserId.orElse(UserSubscription.newSubscription(socialUserEntity.getSocialUserId()))
+                                .getSubscriptionType()
+                                .toRole())
                         .build());
     }
 
@@ -55,6 +66,9 @@ public class UserRepository implements FetchUserPort, InsertUserPort {
     public UserPortResponse create(CreateUser user) {
         UserEntity userEntity = new UserEntity(user.getUsername(), user.getEncryptedPassword(), user.getEmail(), user.getPhone());
         UserEntity save = userJpaRepository.save(userEntity);
+
+        userSubscriptionRepository.create(save.getUserId());
+
         return UserPortResponse.builder()
                 .userId(save.getUserId())
                 .username(save.getUsername())
@@ -69,6 +83,9 @@ public class UserRepository implements FetchUserPort, InsertUserPort {
     public UserPortResponse createSocialUser(String username, String provider, String providerId) {
         SocialUserEntity socialUserEntity = new SocialUserEntity(username, provider, providerId);
         socialUserJpaRepository.save(socialUserEntity);
+
+        userSubscriptionRepository.create(socialUserEntity.getSocialUserId());
+
         return UserPortResponse.builder()
                             .provider(provider)
                             .providerId(providerId)

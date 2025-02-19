@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import yeo.nuel.lix.audit.MutableBaseEntity;
 import yeo.nuel.lix.subscription.SubscriptionType;
 import yeo.nuel.lix.subscription.UserSubscription;
 
@@ -20,7 +21,7 @@ import yeo.nuel.lix.subscription.UserSubscription;
 @Table(name = "user_subscriptions")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class UserSubscriptionEntity {
+public class UserSubscriptionEntity extends MutableBaseEntity {
 
     @Id
     @Column(name = "USER_SUBSCRIPTION_ID")

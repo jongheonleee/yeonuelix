@@ -7,16 +7,12 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import yeo.nuel.lix.token.FetchTokenUseCase;
-import yeo.nuel.lix.token.CreateTokenUseCase;
-import yeo.nuel.lix.token.UpdateTokenUseCase;
 import yeo.nuel.lix.token.response.TokenResponse;
 import yeo.nuel.lix.user.FetchUserUseCase;
 import yeo.nuel.lix.user.response.UserResponse;
@@ -50,7 +46,6 @@ public class TokenService implements FetchTokenUseCase, CreateTokenUseCase, Upda
 
     @Override
     public Boolean validateToken(String accessToken) {
-        System.out.println("accessToken = " + accessToken);
         Jwts.parser()
                 .setSigningKey(secretKey)
                 .build()
