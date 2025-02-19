@@ -52,6 +52,7 @@ public class UserRepository implements FetchUserPort, InsertUserPort {
 
         return Optional.of(
                 UserPortResponse.builder()
+                        .userId(socialUserEntity.getSocialUserId())
                         .provider(socialUserEntity.getProvider())
                         .providerId(socialUserEntity.getProviderId())
                         .username(socialUserEntity.getUsername())

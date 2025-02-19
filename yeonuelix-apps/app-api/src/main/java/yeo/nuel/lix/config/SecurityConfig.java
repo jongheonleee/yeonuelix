@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import yeo.nuel.lix.filter.JwtAuthenticationFilter;
+import yeo.nuel.lix.filter.UserHistoryLoggingFilter;
 import yeo.nuel.lix.security.YeonuelixUserDetailsService;
 
 @Configuration
@@ -26,8 +27,11 @@ public class SecurityConfig {
     // 유저 정보 조회
     private final YeonuelixUserDetailsService yeonuelixUserDetailsService;
 
-    // 토큰 검증 처리(필터)
+    // 토큰 검증 처리 필터
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    // 사용자 로깅 처리 필터
+    private final UserHistoryLoggingFilter userHistoryLoggingFilter;
 
     // 시큐리티 필터 체인 등록
     @Bean
@@ -57,6 +61,7 @@ public class SecurityConfig {
 
         // 토큰 검증 필터 등록
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterAfter(userHistoryLoggingFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

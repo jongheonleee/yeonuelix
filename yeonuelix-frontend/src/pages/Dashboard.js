@@ -26,6 +26,31 @@ function Dashboard() {
     setPage(e.target.value)
   };
 
+  const download = (movieName) => {
+    axios.post(`http://localhost:8080/api/v1/movie/${movieName}/download`, {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      alert(error);
+      console.log(error);
+    })
+  }
+
+  const like = (movieName) => {
+    const response = axios.post(`http://localhost:8080/api/v1/movie/${movieName}/like`, {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    })
+  }
+
 
   return (
       <div className="card shadow-sm p-4" style={{width: '100%'}}>
@@ -47,6 +72,7 @@ function Dashboard() {
             <tr>
               <th>영화 이름</th>
               <th>설명</th>
+              <th>다운로드</th>
             </tr>
             </thead>
             <tbody>
@@ -54,6 +80,12 @@ function Dashboard() {
                 <tr key={item.movieName}>
                   <td>{item.movieName}</td>
                   <td>{item.overview}</td>
+                  <td>
+                    <button onClick={() => download(item.movieName)}>다운로드</button>
+                  </td>
+                  <td>
+                    <button onClick={() => like(item.movieName)}>좋아요</button>
+                  </td>
                 </tr>
             ))}
             </tbody>

@@ -13,7 +13,7 @@ import yeo.nuel.lix.movie.UserMovieDownload;
 
 @Getter
 @Entity
-@Table(name = "user_movie_download")
+@Table(name = "user_movie_downloads")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class UserMovieDownloadEntity extends MutableBaseEntity {

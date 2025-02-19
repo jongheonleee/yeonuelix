@@ -13,7 +13,7 @@ import yeo.nuel.lix.movie.UserMovieLike;
 
 @Getter
 @Entity
-@Table(name = "user_movie_like")
+@Table(name = "user_movie_likes")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class UserMovieLikeEntity extends MutableBaseEntity {
