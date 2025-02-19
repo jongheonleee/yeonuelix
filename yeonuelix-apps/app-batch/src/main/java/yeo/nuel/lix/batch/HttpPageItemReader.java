@@ -47,7 +47,7 @@ public class HttpPageItemReader extends AbstractItemCountingItemStreamItemReader
 
     private void readRow() {
         PageableMoviesResponse pageableMoviesResponse = fetchMovieUseCase.fetchFromClient(page);
-        contents.addAll(pageableMoviesResponse.getMovieRespons());
+        contents.addAll(pageableMoviesResponse.getMovieResponses());
         page++;
     }
 }
